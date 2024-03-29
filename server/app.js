@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
 const createError = require('http-errors');
 const connectDB = require('./config/init_db');
+const userRoutes = require('./routes/user.routes');
 const app = express();
 
 dotenv.config();
@@ -16,6 +17,9 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 app.use(morgan('dev'));
+
+// routes
+app.use('/api/v1/user',userRoutes);
 
 app.use(async(req,res,next) => {
     next(createError.NotFound());
