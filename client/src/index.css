@@ -12,7 +12,7 @@
 body{
   background-color: black;
   font-family: 'Comic Neue', cursive;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 swiper-container {
@@ -20,8 +20,6 @@ swiper-container {
   height: 70vh;
   line-height: 200px;
   text-align: center;
-  z-index: -1;
-  position: absolute;
 }
 
 /* swiper-slide {
