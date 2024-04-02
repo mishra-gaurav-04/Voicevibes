@@ -37,13 +37,13 @@ const Home = () => {
       </div>
     </section>
     <section>
-      <div className='container mx-auto flex flex-col px-8 md:flex-row text-white items-center justify-between'>
+      <div className='container mx-auto flex gap-5 flex-col px-8 md:flex-row text-white items-center justify-between'>
       <div className='w-1/2 md:text-left text-center'>
         <h1 className='text-2xl text-gray-500 md:text-6xl'>Make The Impact</h1>
         <p className='text-md md:text-xl text-gray-600'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, voluptas. Nihil laboriosam ratione ea possimus similique est aliquam facilis blanditiis, officia commodi, dolorum exercitationem porro sapiente debitis nemo earum sunt?</p>
       </div>
         <div className='w-1/2'>
-          <img src={sectionImg} alt="section-img" />
+          <img src={sectionImg} alt="section-img" className='w-full' />
         </div>
        
       </div>
