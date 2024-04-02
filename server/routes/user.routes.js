@@ -9,4 +9,6 @@ router.post('/login',authController.login);
 router.post('/refresh',authController.refresh);
 router.delete('/logout',authController.logout);
 
+// user routes
+
 module.exports = router;

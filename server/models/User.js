@@ -14,7 +14,8 @@ const userSchema = new Schema({
     },
     password : {
         type : String,
-        required : true
+        required : true,
+        select : false
     },
     username : {
         type : String,
@@ -39,5 +40,14 @@ userSchema.pre('save',async function(next){
     this.password = await bcrypt.hash(this.password,12);
     next();
 })
+
+userSchema.methods.validPassword = async function(password){
+    try{
+        return bcrypt.compare(password,this.password);
+    }
+    catch(error){
+        throw errro
+    }
+}
 
 module.exports = mongoose.model('User',userSchema);
