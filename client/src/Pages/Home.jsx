@@ -6,6 +6,7 @@ import swipe1 from '../assets/img/swipe1.jpg'
 import swipe2 from '../assets/img/swipe2.jpg'
 import swipe3 from '../assets/img/swipe3.jpg'
 import swipe4 from '../assets/img/swipe4.jpg'
+import sectionImg from '../assets/img/section-img.jpeg'
 
 const Home = () => {
   const image = [swipe1, swipe2, swipe3, swipe4];
@@ -36,8 +37,20 @@ const Home = () => {
       </div>
     </section>
     <section>
+      <div className='container mx-auto flex flex-col px-8 md:flex-row text-white items-center justify-between'>
+      <div className='w-1/2 md:text-left text-center'>
+        <h1 className='text-2xl text-gray-500 md:text-6xl'>Make The Impact</h1>
+        <p className='text-md md:text-xl text-gray-600'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, voluptas. Nihil laboriosam ratione ea possimus similique est aliquam facilis blanditiis, officia commodi, dolorum exercitationem porro sapiente debitis nemo earum sunt?</p>
+      </div>
+        <div className='w-1/2'>
+          <img src={sectionImg} alt="section-img" />
+        </div>
+       
+      </div>
+    </section>
+    <section>
       <div className='container mx-auto flex items-center justify-center mb-1 text-white'>
-        <Link to='/auth' className='bg-blue-700 px-10 py-4 rounded-full flex items-center gap-5 hover:bg-blue-500'>Let's begin <FaArrowRight /></Link>
+        <Link to='/auth' className='bg-blue-700 px-10 py-4 rounded-full flex items-center border-1 border border-slate-300 gap-5 hover:bg-blue-500'>Let's begin <FaArrowRight /></Link>
       </div>
     </section>
   </main>

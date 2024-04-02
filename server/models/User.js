@@ -18,6 +18,7 @@ const userSchema = new Schema({
         unique : true
     },
     role : {
+        type : String,
         enum : {
             values : ['speaker','listner','admin'],
             default : 'listner'
