@@ -25,7 +25,21 @@ const signAccessToken = (userId) => {
     })
 }
 const signRefreshToken = (userId) => {
-        
+    return new Promise((resolve,reject) => {
+        const payload = {};
+        const options = {
+            expiresIn : process.env.REFRESH_TOKEN_EXPIRE,
+            issuer : 'localhost',
+            audience : userId
+        }
+        jwt.sign(payload,refreshTokenSecret,options,(err,token) => {
+            if(err){
+                console.log(err);
+                reject(createError.InternalServerError());
+            }
+            resolve(token);
+        })
+    })
 }
 
 module.exports = {
