@@ -16,19 +16,15 @@ exports.register = async (req, res, next) => {
         const accessToken = await signAccessToken(newUser.id);
         const refreshToken = await signRefreshToken(newUser.id);
 
-        res.cookie('accessToken',accessToken,{
-            maxAge : new Date(Date.now()+60*60*1000),
-            httpOnly : true
-        })
-
         res.cookie('refreshToken',refreshToken,{
-            maxAge : new Date(Date.now()+24*60*60*1000),
+            maxAge : 24*60*60*1000,
             httpOnly : true
         })
         const userData = get_user_data(newUser);
         res.status(201).json({
             success : true,
-            userData
+            userData,
+            token : accessToken
         })
     }
     catch (error) {
@@ -40,23 +36,18 @@ exports.register = async (req, res, next) => {
 };
 exports.login = async (req, res, next) => {
     try{
-        const result = loginSchema.validateAsync(req.body);
-        const user = await User.findOne({email:result.email});
+        const result = await loginSchema.validateAsync(req.body);
+        const user = await User.findOne({email : result.email}).select('+password');
         if(!user){
             throw createError.NotFound('User Not found');
         }
-        const isValid = user.validPassword(result.password);
+        const isValid = user.validPassword(result.password,user.password);
         if(!isValid){
             throw createError.Conflict('Email or Password is wrong');
         }
 
         const accessToken = await signAccessToken(user.id);
         const refreshToken = await signRefreshToken(user.id);
-
-        res.cookie('accessToken',accessToken,{
-            maxAge : new Date(Date.now() + 60 * 60 * 1000),
-            httpOnly : true
-        });
 
         res.cookie('refreshToken',refreshToken,{
             maxAge : new Date(Date.now() + 24*60*60*1000),
@@ -66,9 +57,9 @@ exports.login = async (req, res, next) => {
         const userData = get_user_data(user);
         res.status(200).json({
             success : true,
-            userData
+            userData,
+            token : accessToken
         });
-
     }
     catch(error){
         if(error.isJoi === true){

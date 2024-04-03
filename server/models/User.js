@@ -41,12 +41,12 @@ userSchema.pre('save',async function(next){
     next();
 })
 
-userSchema.methods.validPassword = async function(password){
+userSchema.methods.validPassword = async function(candidatePassword,userPassword){
     try{
-        return bcrypt.compare(password,this.password);
+        return await bcrypt.compare(candidatePassword,userPassword);
     }
     catch(error){
-        throw errro
+        throw error
     }
 }
 
